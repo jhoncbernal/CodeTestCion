@@ -12,7 +12,10 @@ class PostgresConsole {
     this._postgresUser = new PostgresUser();
     this._postgresMessage = new PostgresMessage();
   }
-
+  private async deletePreviusData() {
+    await this._postgresMessage.deleteDataTableMessages();
+    await this._postgresUser.deleteDataTableUsers();
+  }
   private async insertUsers() {
     this.user1 = await this._postgresUser.insertUser(
       "Test 1",
@@ -24,11 +27,21 @@ class PostgresConsole {
     );
   }
 
-  private async startConversation() {
-    await this._postgresMessage.sendMessage(this.user1.user_id, this.user2.user_id, "Hey");
-    await this._postgresMessage.sendMessage(this.user2.user_id, this.user1.user_id, "How are you Today?");
-    await this._postgresMessage.sendMessage(this.user1.user_id, this.user2.user_id, "Awesome and you?");
-    await this._postgresMessage.sendMessage(this.user2.user_id, this.user1.user_id, "Nothing new ");
+  private async startConversation(messages: string[]) {
+    let startConversation: boolean = true;
+    await Promise.all(
+      messages.map(async (message: string): Promise<Message> => {
+        const userId1: number = startConversation
+          ? this.user1.user_id
+          : this.user2.user_id;
+        const userId2: number = startConversation
+          ? this.user2.user_id
+          : this.user1.user_id;
+       
+        startConversation = false;
+       return await this._postgresMessage.sendMessage(userId1, userId2, message);
+      })
+    );
   }
 
   private async consoleConversation() {
@@ -36,20 +49,21 @@ class PostgresConsole {
       this.user1.user_id,
       this.user2.user_id
     );
-    let users:User[]=[this.user1,this.user2];
-    const chatConsole = await Promise.all(
-      messages.map(async (message: Message) => {
-        const user: User =users.find((user:User) => user.user_id == message.from_user);
-        return `${user.display_name}: ${message.body}`;
-      })
-    );
+    let users: User[] = [this.user1, this.user2];
+    const chatConsole = messages.map( (message: Message) => {
+      const user: User = users.find(
+        (user: User) => user.user_id == message.from_user
+      );
+      return `${user.display_name}: ${message.body}`;
+    });
 
-    console.log(chatConsole);
+    console.log("Chat Conversation :",chatConsole);
   }
 
-  public async start() {
+  public async start(messages: string[]) {
+    await this.deletePreviusData();
     await this.insertUsers();
-    await this.startConversation();
+    await this.startConversation(messages);
     await this.consoleConversation();
   }
 }
