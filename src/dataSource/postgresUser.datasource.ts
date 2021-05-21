@@ -12,7 +12,7 @@ class PostgresUser implements PostgresUserRepository {
   }
   public async insertUser(displayName:string,email:string): Promise<User> {
     const users: User =await this.executeQuery(`INSERT INTO users (display_name,email) VALUES ('${displayName}','${email}') RETURNING *`);
-    return users;
+    return users[0];
   }
   
   private async executeQuery(query:string){
