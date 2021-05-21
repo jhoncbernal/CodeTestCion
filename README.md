@@ -15,7 +15,7 @@ Write a node JS script that inserts 2 users into the database, and creates 2 mes
 ### PgAdmin Configuration
 ![image](https://user-images.githubusercontent.com/27929182/119171893-d03d4080-ba2a-11eb-9b86-acdc7bb6dd87.png)
 ### Node js log 
-![image](https://user-images.githubusercontent.com/27929182/119170384-cadef680-ba28-11eb-96ea-eb1846154010.png)
+![image](https://user-images.githubusercontent.com/27929182/119172068-0f6b9180-ba2b-11eb-8c3b-08484701e32c.png)
 ### DB data 
 * ![image](https://user-images.githubusercontent.com/27929182/119170606-1beeea80-ba29-11eb-83da-b78542b507a8.png)
 * ![image](https://user-images.githubusercontent.com/27929182/119170649-2c06ca00-ba29-11eb-8b14-e605979d2520.png)
