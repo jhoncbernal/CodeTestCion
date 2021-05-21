@@ -1,0 +1,21 @@
+{
+  "name": "cion_interview_task",
+  "version": "1.0.0",
+  "description": "Write a node JS script that inserts 2 users into the database, and creates 2 messages between the users. Then query the database and retreive the information on the 2 users and their chat history. Log this data to the node console",
+  "main": "dist/src/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc && node dist/src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jhon Casallas",
+  "license": "ISC",
+  "dependencies": {
+    "pg": "^8.6.0"
+  },
+  "devDependencies": {
+    "mocha": "^8.4.0",
+    "tslint": "^6.1.3",
+    "typescript": "^4.2.4"
+  }
+}
