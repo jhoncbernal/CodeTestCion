@@ -1,0 +1,22 @@
+DROP TABLE IF EXISTS messages;
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users(
+   user_id INT GENERATED ALWAYS AS IDENTITY,
+   display_name VARCHAR(255) NOT NULL,
+   email VARCHAR(100) NOT NULL UNIQUE,
+   PRIMARY KEY(user_id)
+);
+
+CREATE TABLE messages(
+   message_id INT GENERATED ALWAYS AS IDENTITY,
+   from_user INT NOT NULL,
+   to_user INT NOT NULL,
+   date TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+   body VARCHAR(255),
+   PRIMARY KEY(message_id),
+   CONSTRAINT fk1 FOREIGN KEY (from_user) 
+      REFERENCES users (user_id) ON DELETE CASCADE,
+    CONSTRAINT fk2 FOREIGN KEY (to_user) 
+      REFERENCES users (user_id) ON DELETE CASCADE
+);
