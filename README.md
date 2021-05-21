@@ -29,12 +29,12 @@ Write a node JS script that inserts 2 users into the database, and creates 2 mes
 * Go to connection tab into the field host : `your local ip or localhost`, username: `postgres` and password : `newPassword`
 * Go to Databases, cion-db, Schemas, public, tables and there are 2 tables messages and users 
 * Create 2 new queries:
-* 
--`SELECT message_id, from_user, to_user, date, body
-	FROM public.messages;`
-  
--`SELECT user_id, display_name, email
-	FROM public.users;`
+	
+	-`SELECT message_id, from_user, to_user, date, body
+		FROM public.messages;`
+
+	-`SELECT user_id, display_name, email
+		FROM public.users;`
   
 * Also you can enter to the coinainer log cion-code-test and check the log 
 
